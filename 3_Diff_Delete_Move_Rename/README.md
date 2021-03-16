@@ -33,6 +33,7 @@ Other variations:
 
 1. `git diff --staged` : Difference between repository and staged commit
 2. `git diff --cached`
+3. `git diff --color-words` : Shows red and green only for the different contents.
 
 What is the difference between `git diff` and `git diff --staged`?
 
