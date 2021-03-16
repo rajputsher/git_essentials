@@ -39,6 +39,13 @@ What is the difference between `git diff` and `git diff --staged`?
 
 `git diff` compares the changes to working directory files to the staging index, while `git diff --staged` compares staged files to the repository versions.
 
+## Show contents of a particular commit
+
+- `git show <commit_id>` : will show what was changed in that commit.
+- `git show <commit_id> --color-words`
+
+ex: `git show dbf341s`
+
 ## Delete Files
 
 `git rm file_to_delete.txt` 
@@ -108,3 +115,18 @@ Changes to be committed:
         renamed:    SecondFile.txt -> SecondaryFile.txt
         renamed:    ThirdFile.txt -> firstFolder/ThirdFile.txt
 ```
+
+## Git compare 
+
+compare the changes between 2 specific git commits.
+
+`git diff <commit_id1>..<commit_id2>`
+
+Ex: 
+1. `git diff b2326e79..fd840328 --color-words`
+2. `git diff b2326e79..HEAD --color-words`
+
+
+## Multiline git commit 
+
+`git commit -a` enter, will open up a text editor to add the comments , here we can add multiple line commit message.
