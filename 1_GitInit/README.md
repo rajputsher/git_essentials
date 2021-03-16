@@ -31,8 +31,31 @@ The Main steps in git are :
 
 ## View the commit log
 
-git log
+`git log` : this command gives the history of log and commit ID. commit ID is unique.
 
+The log message looks like : 
+
+```
+commit 0615242dac44a1760880fe571a4f9c06dde111d2 (HEAD -> master)
+Author: rajputsher <shersingh72@gmail.com>
+Date:   Tue Mar 16 08:27:32 2019 +0100
+
+    Message description
+```
+
+Variations of log command :
+- `git log -n 5`: Log of 5 recent commits
+- `git log --since=2019-02-15` : Log since a specfic date
+- `git log --until=2019-02-15`: Log until a specific date 
+- `git log --author="Name/Partof the name"` 
+- `git log --grep="Init"`: Returns all log with init in the commit message
+
+
+Example: 
+Output the log for all of Karen's commits labeled "refactor" during March 2019
+```
+git log --since=2019-03-01 --until=2019-03-31 --author="Karen" --grep="refactor"
+```
 
 ## Set username/email for a specific repository
 
