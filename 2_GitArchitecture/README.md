@@ -88,3 +88,11 @@ cat .git/refs/heads/master
 3584242dac44a1760880fe571a4f9c06dde111d2
 ```
 
+## Stage and Commit Shortcut 
+
+Instead of `git add .` and `git commit -m ""` , if we are sure that all the changes that are made needs to be commited then we can use the shortcut `git commit -a` or `git commit --all`. 
+
+- This shortcut stages and commits all changes to the tracked files.
+- Does not include untracked files.
+
+to include message in the commit use `git commit -am "Edited all files, containing xyz and replaced it with jkl"`
