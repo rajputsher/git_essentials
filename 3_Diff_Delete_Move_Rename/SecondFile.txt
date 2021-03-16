@@ -1,1 +1,2 @@
 This is the Second file added to this folder.
+Second line of second file.

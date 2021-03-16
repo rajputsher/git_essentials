@@ -1,1 +1,3 @@
-This is the First file added to this folder
+This is the First file added to this project folder.
+
+Added second text line to the third line of this file.
