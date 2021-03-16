@@ -34,6 +34,10 @@ Other variations:
 1. `git diff --staged` : Difference between repository and staged commit
 2. `git diff --cached`
 
+What is the difference between `git diff` and `git diff --staged`?
+
+`git diff` compares the changes to working directory files to the staging index, while `git diff --staged` compares staged files to the repository versions.
+
 ## Delete Files
 
 `git rm file_to_delete.txt` 
