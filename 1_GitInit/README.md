@@ -73,8 +73,6 @@ git config --get user.email
 
 ## Set username/email globally
 
-## Set username/email for a specific repository
-
 ```git
 git config --global user.name "Your global username"
 git config --global user.email "your@email.com"
