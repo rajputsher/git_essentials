@@ -78,7 +78,7 @@ Changes to be committed:
         renamed:    Firstfile.txt -> Primaryfile.txt
 ```
 
-## Use move to rename the file.
+## Use move to rename the file
 
 Ex:
 
