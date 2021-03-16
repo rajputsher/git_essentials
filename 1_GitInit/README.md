@@ -17,3 +17,49 @@ The Main steps in git are :
 1. Make Changes
 2. Add the Changes: `git add .`
 3. Commit changes to the repository with a message: `git commit -m "message"`
+
+
+## Commit message best practices 
+
+- A Short single-line summary(less than 50 characters)
+- Optionally followed by a blank line and a more complete description
+- Keep each line to less than 72 characters 
+- Write commit messages in present tense, not past tense. "Fix of a bug" or "Fixes a bug", not "Fixed a bug"
+- Bullet points are ususally asteriks or hyphens
+- Can add "tracking numbers" from bugs or support requests
+- Can develop shorthand specific to organization ex: "bugfix", "new feature", "requirement ID:" etc.
+
+## View the commit log
+
+git log
+
+
+## Set username/email for a specific repository
+
+```git
+git config user.name "Your project specific name"
+git config user.email "your@project-specific-email.com"
+```
+
+Verify your settings: 
+
+```git
+git config --get user.name
+git config --get user.email
+```
+
+## Set username/email globally
+
+## Set username/email for a specific repository
+
+```git
+git config --global user.name "Your global username"
+git config --global user.email "your@email.com"
+```
+
+Verify your settings: 
+
+```git
+git config --global --get user.name
+git config --global --get user.email
+```
