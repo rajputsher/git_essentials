@@ -213,3 +213,6 @@ This can be done using: `git checkout <SHA Value> -- <filename>`
 
 ## Remove untracked files in the repository.
 
+We can do it using: 
+- `git clean -n` : Dry run it shows which of the files will be removed.
+- `git clean -f` : Will remove the untracked files.
