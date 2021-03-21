@@ -19,7 +19,7 @@ HEAD moves around depending on the tip of the current branch we are on.
 The command `git branch` will show us the available branches in the git repository.
 
 ```
-git branch
+>>git branch
 * master
 ```
 Here we have only master branch. and * indicates the current branch.
@@ -28,6 +28,166 @@ Here we have only master branch. and * indicates the current branch.
 To create a new branch: `git branch new_feature` 
 
 ```
-git branch
+>>git branch
+* master
+  new_feature
 ```
+To show where the cuurent HEAD is pointing we can see .git/HEAD file.
+`cat .git/HEAD`.
+
+```
+>> cat .git/HEAD
+ref: refs/heads/master
+```
+
+The folder refs/heads/ contains multiple files showing different branches. On windows, this might look different on Unix based OS:
+```
+Mode                LastWriteTime         Length Name
+----                -------------         ------ ----
+-a----       21.03.2019     16:08             41 master
+-a----       21.03.2019     16:08             41 new_feature
+```
+
+Right now both these files contain the same content as there is no new commit in the branch.
+
+```
+>>cat .\.git\refs\heads\master
+aca2cdeb4f2fedfc2a033f2b141884b79f9d8d00
+
+>> cat .\.git\refs\heads\new_feature
+aca2cdeb4f2fedfc2a033f2b141884b79f9d8d00
+```
+
+We can confirm that the head is pointing to both the main branch and the new_feature by `git log --oneline` which gives: 
+```
+>>git log --oneline
+aca2cde (HEAD -> master, new_feature) commit before creating new_feature branch
+29a4849 (origin/master) Navigating the commit tree
+4339bfb Change folder name from 6_gitignore to 6_git_ignore
+b961c18 remove untracked files
+d30be48 Undo changes in git
+75d92ab Reorder recommended items to carry for trip
+```
+## Switch branch
+
+Now to switch to the new_feature branch we need to checkout:
+`git checkout new_feature`
+
+```
+>>git checkout new_feature
+Switched to branch 'new_feature'
+
+>>git branch
+  master
+* new_feature
+
+>>cat .\.git\HEAD
+ref: refs/heads/new_feature
+```
+
+Here we can see that the HEAD is now pointing to the new_feature branch.
+
+```
+> git status
+On branch new_feature
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+
+        8_Branching/fileforabranch.txt
+
+> git add .
+> git commit -am "Add file to new_feature branch"
+[new_feature 36e6994] Add file to new_feature branch
+ 1 file changed, 1 insertion(+)
+ create mode 100644 8_Branching/fileforabranch.txt
+```
+Now the git log commit shows : 
+```
+>> git log --oneline
+36e6994 (HEAD -> new_feature) Add file to new_feature branch
+aca2cde (master) commit before creating new_feature branch
+29a4849 (origin/master) Navigating the commit tree
+4339bfb Change folder name from 6_gitignore to 6_git_ignore
+b961c18 remove untracked files
+```
+
+Now moving back to master branch is as simple as `git checkout master`
+and the log now looks like: 
+```
+>> git log --oneline
+aca2cde (HEAD -> master) commit before creating new_feature branch
+29a4849 (origin/master) Navigating the commit tree
+4339bfb Change folder name from 6_gitignore to 6_git_ignore
+b961c18 remove untracked files
+d30be48 Undo changes in git
+```
+There is no log of the feature branch here.
+
+### Create and switch branches
+
+Creating a new branch and from the new_feature branch.
+```
+>> git checkout new_feature
+Switched to branch 'new_feature'
+
+>> git checkout -b shorten_the_text
+Switched to a new branch 'shorten_the_text'
+```
+
+`git checkout -b <branch_name>` : Creates and switches to the new branch.
+
+Now make changes to the file. 
+```
+>> git status
+On branch shorten_the_text
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+        modified:   8_Branching/fileforabranch.txt
+
+>> git add .\8_Branching\fileforabranch.txt
+>> git commit -m "Shortened the text"
+[shorten_the_text f796556] Shortened the text
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+>> git log --oneline
+f796556 (HEAD -> shorten_the_text) Shortened the text
+36e6994 (new_feature) Add file to new_feature branch
+aca2cde (master) commit before creating new_feature branch
+29a4849 (origin/master) Navigating the commit tree
+4339bfb Change folder name from 6_gitignore to 6_git_ignore
+```
+
+Here we can see above that all the three branches are on a different commit.
+
+### Switching branches with uncomitted changes.
+
+Making changes to file and trying to switch to another branch will give us error as below:
+```
+>> git status
+On branch shorten_the_text
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+        modified:   8_Branching/fileforabranch.txt
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
+>> git checkout new_feature
+error: Your local changes to the following files would be overwritten by checkout:
+        8_Branching/fileforabranch.txt
+Please commit your changes or stash them before you switch branches.
+Aborting
+```
+
+Git will allow us to change the branch with out commit in the following cases: 
+- If the changes in working directory could be applied without conflict.
+- If files are not being tracked.
+
+The solution to the above error is : 
+- Commit the changes in the current branch 
+- remove the changes, checkout the file again
+- stash the changes
 

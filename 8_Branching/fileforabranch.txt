@@ -1,1 +1,1 @@
-Trying the feature branching in git.
+Trying the feature branching in git repo.
