@@ -191,3 +191,45 @@ The solution to the above error is :
 - remove the changes, checkout the file again
 - stash the changes
 
+## git compare the branches
+
+```
+>> git diff master..new_feature
+diff --git a/8_Branching/fileforabranch.txt b/8_Branching/fileforabranch.txt
+new file mode 100644
+index 0000000..0ecbe7c
+--- /dev/null
++++ b/8_Branching/fileforabranch.txt
+@@ -0,0 +1 @@
++This file is to try the feature branching in git.
+\ No newline at end of file
+
+>> git diff new_feature..shorten_the_text
+diff --git a/8_Branching/fileforabranch.txt b/8_Branching/fileforabranch.txt
+index 0ecbe7c..4d36feb 100644
+--- a/8_Branching/fileforabranch.txt
++++ b/8_Branching/fileforabranch.txt
+@@ -1 +1 @@
+-This file is to try the feature branching in git.
+\ No newline at end of file
++Trying the feature branching in git repo.
+\ No newline at end of file
+```
+
+- `git diff <branch1>..<master>`
+- `git diff --color-words <branch1>..<master>`
+- `git diff --color-words <branch1>..<master>^^` : compare with different versions of branches
+
+To see the branches which have already been merged. `git branch --merged`. 
+```
+>> git branch --merged
+  master
+  new_feature
+* shorten_the_text
+```
+Here this means all of the commits that are in master branch and in the new_feature branch are in the shorten_the_text.
+
+Now lets do that same in the new_feature branch.
+```
+
+```
