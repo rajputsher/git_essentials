@@ -95,3 +95,82 @@ we can see which branches are tracking in the .git/config file.
 
 Here only the master branch is tracking the repo and not the other branches on the local repo.
 
+Ex: 
+Let us create a branch and see how we can track and untrack it.
+
+1. `git branch -u origin/non_tracking non_tracking`
+```
+>> git checkout non_tracking
+Switched to branch 'non_tracking'
+
+>> git push origin non_trackin
+g
+Total 0 (delta 0), reused 0 (delta 0)
+remote:
+remote: Create a pull request for 'non_tracking' on GitHub by visiting:
+remote:      https://github.com/rajputsher/git_essentials/pull/new/non_tracking
+remote:
+To https://github.com/rajputsher/git_essentials.git
+ * [new branch]      non_tracking -> non_tracking
+
+>> cat .git/config
+[core]
+        repositoryformatversion = 0
+        filemode = false
+        bare = false
+        logallrefupdates = true
+        symlinks = false
+        ignorecase = true
+[remote "origin"]
+        url = https://github.com/rajputsher/git_essentials.git
+        fetch = +refs/heads/*:refs/remotes/origin/*
+[branch "master"]
+        remote = origin
+        merge = refs/heads/master
+
+
+>> git branch -u origin/non_tr
+acking non_tracking
+Branch 'non_tracking' set up to track remote branch 'non_tracking' from 'origin'.
+
+>> cat .git/config
+[core]
+        repositoryformatversion = 0
+        filemode = false
+        bare = false
+        logallrefupdates = true
+        symlinks = false
+        ignorecase = true
+[remote "origin"]
+        url = https://github.com/rajputsher/git_essentials.git
+        fetch = +refs/heads/*:refs/remotes/origin/*
+[branch "master"]
+        remote = origin
+        merge = refs/heads/master
+[branch "non_tracking"]
+        remote = origin
+        merge = refs/heads/non_tracking
+```
+Not the branch non_tracking is tracking the remote origin/non_tracking
+
+2. To untrack it we need to use the option `--unset-upstream`
+
+```
+>> git branch --unset-upstream non_tracking
+
+>> cat .git/config
+[core]
+        repositoryformatversion = 0
+        filemode = false
+        bare = false
+        logallrefupdates = true
+        symlinks = false
+        ignorecase = true
+[remote "origin"]
+        url = https://github.com/rajputsher/git_essentials.git
+        fetch = +refs/heads/*:refs/remotes/origin/*
+[branch "master"]
+        remote = origin
+        merge = refs/heads/master
+```
+Now the non_tracking branch is not tracked.
