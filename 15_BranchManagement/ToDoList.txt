@@ -3,3 +3,8 @@ Morning
 Develop feature Alien
 Call the housing company
 Send the email to landlord
+
+Afternoon
+==========
+Prepare presentation for customer demo
+Review the new architecture
