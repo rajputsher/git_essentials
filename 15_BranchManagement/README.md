@@ -142,3 +142,6 @@ Now the log of the collaborator and that I commited are same.
 
 > Therefore, doing a forced push is simple but the impact on the collaborators is big.
 
+
+## Identify merged branches
+
