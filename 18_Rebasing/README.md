@@ -309,3 +309,58 @@ Here we can see in the log that the SHA before the rebase and current HEAD are t
 - only use on local commits not shared to a remote 
 
 `git pull --rebase` or `git pull -r` or `git pull --rebase=preserve`
+
+
+## Merging all the rebase to master
+
+```
+> git checkout master
+Switched to branch 'master'
+Your branch is ahead of 'origin/master' by 4 commits.
+  (use "git push" to publish your local commits)
+
+>> git merge camping
+Updating af728d9..9085b2e
+Fast-forward
+ 15_BranchManagement/CampingList.txt |   9 ++++
+ 15_BranchManagement/ToDoList.txt    |   3 +-
+ 18_Rebasing/README.md               |  87 ++++++++++++++++++++++++++++++++----
+ 18_Rebasing/images/10.png           | Bin 0 -> 118326 bytes
+ 18_Rebasing/images/9.png            | Bin 0 -> 148698 bytes
+ 5 files changed, 89 insertions(+), 10 deletions(-)
+ create mode 100644 15_BranchManagement/CampingList.txt
+ create mode 100644 18_Rebasing/images/10.png
+ create mode 100644 18_Rebasing/images/9.png
+
+>> git log --graph --all --decorate --oneline -11
+* fe4b758 (expenses) Pull rebase
+* dbad529 interactive rebasing
+* f4340a1 Added Expenses
+* 9085b2e (HEAD -> master, camping) Git rebase --onto
+* 1a810c2 Update shopping list with orange
+* 7e10843 Resolving rebase conflicts
+* 3abbdac MergingVsRebasing
+* ff7e9d2 Todo: Add activities
+* 3cd03f8 Todo List for weekend Camping
+* af728d9 Update shopping list with Apple
+* 3730b34 Rebasing example
+
+>> git merge expenses
+Updating 9085b2e..fe4b758
+Fast-forward
+ 15_BranchManagement/Expenses.txt |   7 +++
+ 18_Rebasing/README.md            | 129 +++++++++++++++++++++++++++++++++++++++
+ 2 files changed, 136 insertions(+)
+ create mode 100644 15_BranchManagement/Expenses.txt
+
+>> git push origin master
+Enumerating objects: 67, done.
+Counting objects: 100% (67/67), done.
+Delta compression using up to 8 threads.
+Compressing objects: 100% (63/63), done.
+Writing objects: 100% (64/64), 1.09 MiB | 1.84 MiB/s, done.
+Total 64 (delta 25), reused 0 (delta 0)
+remote: Resolving deltas: 100% (25/25), completed with 2 local objects.
+To https://github.com/rajputsher/git_essentials.git
+   6523b77..fe4b758  master -> master
+```
