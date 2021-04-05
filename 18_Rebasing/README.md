@@ -41,3 +41,73 @@ Useful for visualizing branches: <br/>
 `git log --graph --all --decorate --oneline`
 
 Return commit where topic branch diverges: <br/>`git merge-base master new_feature`
+
+Example:
+
+1. Create a new branch 'camping'. Make a couple of commits.
+
+```
+>> git checkout -b camping
+Switched to a new branch 'camping'
+
+>> git status
+On branch camping
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+
+        15_BranchManagement/CampingList.txt
+
+nothing added to commit but untracked files present (use "git add" to track)
+
+>> git add .
+
+>> git commit -am "Todo List for weekend Camping"
+[camping 0abeeb7] Todo List for weekend Camping
+ 1 file changed, 5 insertions(+)
+ create mode 100644 15_BranchManagement/CampingList.txt
+
+>> git commit -am "Todo: Add activities "
+[camping e493cb0] Todo: Add activities
+ 1 file changed, 5 insertions(+), 1 deletion(-)
+
+>> git log --oneline
+e493cb0 (HEAD -> camping) Todo: Add activities
+0abeeb7 Todo List for weekend Camping
+4123594 (master) Git Rebasing
+6523b77 (tag: C_17, origin/master) interactive staging
+dec6aeb Checkout tags
+6c77d46 Deleting tags locally and in remote
+7e4d820 tagging commits
+9005075 (tag: C_15) git remote prune
+```
+
+2. Now moving back to the master branch let us make a change to another file.
+
+```
+>> git checkout master
+Switched to branch 'master'
+Your branch is ahead of 'origin/master' by 1 commit.
+  (use "git push" to publish your local commits)
+
+>> git commit -am "Todo: Shopping list updates"
+[master 0c10d62] Todo: Shopping list updates
+ 1 file changed, 8 insertions(+), 1 deletion(-)
+
+>> git log --graph --all --decorate --oneline
+* 0c10d62 (HEAD -> master) Todo: Shopping list updates
+| * e493cb0 (camping) Todo: Add activities
+| * 0abeeb7 Todo List for weekend Camping
+|/
+* 4123594 Git Rebasing
+* 6523b77 (tag: C_17, origin/master) interactive staging
+* dec6aeb Checkout tags
+* 6c77d46 Deleting tags locally and in remote
+* 7e4d820 tagging commits
+* 9005075 (tag: C_15) git remote prune
+* 9d3b922 git remote prune
+```
+
+in the log we can see from the commit where we branched, there are 2 commits in the camping branch and a commit in the master branch. 
+
+Now we can rebase: If we are on the camping branch, we can use `git rebase master`. If we are on master branch we can use `git rebase master camping`
+
