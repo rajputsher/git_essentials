@@ -143,5 +143,156 @@ Now the log of the collaborator and that I commited are same.
 > Therefore, doing a forced push is simple but the impact on the collaborators is big.
 
 
-## Identify merged branches
+## Deleting local and remote branches
+
+To delete a branch, we must be on a different branch than the one we want to delete.
+`git branch -d new_feature`, here the new_feature branch will be deleted only if this branch is fully merged with the existing branches. IF we still want to delete the branch that is not completely merged in to any of the existing branches we use -D instead of -d : `git branch -D new_feature`.
+
+
+### Deleting a remote branch
+
+1. `git push origin :new_feture` or in general <br/> `git push origin <local>:<remote>`
+
+2. The more intuitive method from git v1.7.0+ :<br/> `git push --delete origin new_feature`. 
+3. From version v2.8.0+ :<br/> `git push -d origin new_feature`
+
+## Prune stale branches 
+
+Stale branch is a remote-tracking branch that no longer tracks anything because the actual branch in the remote repository has been deleted.
+
+Remote branches :
+1. Branch on the remote repository(bugfix)
+2. Local snapshot of the remote branch (origin/bugfix)
+3. Local branch, tracking the remote branch(bugfix)
+
+`git remote prune origin` #Delete stale remote-tracking branches
+
+`git remote prune origin --dry-run` # To see what will be deleted before deleting.
+
+Example: 
+
+```
+>> git checkout -b prune_test
+Switched to a new branch 'prune_test'
+M       15_BranchManagement/README.md
+
+>> git push -u origin prune_test
+Enumerating objects: 7, done.
+Counting objects: 100% (7/7), done.
+Delta compression using up to 8 threads.
+Compressing objects: 100% (4/4), done.
+Writing objects: 100% (4/4), 417 bytes | 139.00 KiB/s, done.
+Total 4 (delta 2), reused 0 (delta 0)
+remote: Resolving deltas: 100% (2/2), completed with 2 local objects.
+remote:
+remote: Create a pull request for 'prune_test' on GitHub by visiting:
+remote:      https://github.com/rajputsher/git_essentials/pull/new/prune_test
+remote:
+To https://github.com/rajputsher/git_essentials.git
+ * [new branch]      prune_test -> prune_test
+Branch 'prune_test' set up to track remote branch 'prune_test' from 'origin'.
+
+>> git branch
+  master
+  non_tracking
+* prune_test
+  reset_branch
+  shorten_the_text
+  test_git_branch
+  text_edits
+
+>> git branch -r
+  origin/master
+  origin/non_tracking
+  origin/prune_test
+  origin/reset_branch
+  origin/shorten_the_text
+  origin/test_git_branch
+  origin/text_edits
+```
+
+Now if we delete the branch, using `git push --delete origin prune_test`, both the remote and the local branch will be delted, but if the collaborator deletes it, we need to perform the prune. 
+
+Lets us see how the collaborator deletes the branch: 
+```
+>> git branch -r
+  origin/HEAD -> origin/master
+  origin/master
+  origin/non_tracking
+  origin/prune_test
+  origin/reset_branch
+  origin/shorten_the_text
+  origin/test_git_branch
+  origin/text_edits
+
+>> git push origin :prune_test
+To https://github.com/rajputsher/git_essentials.git
+ - [deleted]         prune_test
+
+>> git branch -r
+  origin/HEAD -> origin/master
+  origin/master
+  origin/non_tracking
+  origin/reset_branch
+  origin/shorten_the_text
+  origin/test_git_branch
+  origin/text_edits
+
+>> git branch
+* master
+  non_tracking
+```
+Here we can see that for the collaborator who deleted the branch, both the local and remote branches were deleted.
+
+Back to our repository.
+```
+>> git branch -r
+  origin/master
+  origin/non_tracking
+  origin/prune_test
+  origin/reset_branch
+  origin/shorten_the_text
+  origin/test_git_branch
+  origin/text_edits
+
+>> git fetch
+
+>> git branch -r
+  origin/master
+  origin/non_tracking
+  origin/prune_test
+  origin/reset_branch
+  origin/shorten_the_text
+  origin/test_git_branch
+  origin/text_edits
+```
+Even after doing `git fetch` the remote branch was not deleted for us by git. 
+We need to do it our-selves by pruning. It is always recommented to check what would be pruned using --dry-run option.
+
+```
+>> git remote prune origin --dry-run
+Pruning origin
+URL: https://github.com/rajputsher/git_essentials.git
+ * [would prune] origin/prune_test
+
+>> git remote prune origin
+Pruning origin
+URL: https://github.com/rajputsher/git_essentials.git
+ * [pruned] origin/prune_test
+
+>> git branch -r
+  origin/master
+  origin/non_tracking
+  origin/reset_branch
+  origin/shorten_the_text
+  origin/test_git_branch
+  origin/text_edits
+```
+
+If you want to get the pruned branches when you fetch. <br/> Use: 1. `git fetch --prune` or `git fetch -p`
+2. Or change the global config to do so: `git config --global fetch.prune true`
+
+Following are not same as `git remote prune `: <br/>
+`git prune`#Prune all the unreachable objects <br/>
+`git gc` #Part of garbage collection
 
