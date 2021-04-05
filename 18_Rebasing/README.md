@@ -93,21 +93,72 @@ Your branch is ahead of 'origin/master' by 1 commit.
 [master 0c10d62] Todo: Shopping list updates
  1 file changed, 8 insertions(+), 1 deletion(-)
 
->> git log --graph --all --decorate --oneline
-* 0c10d62 (HEAD -> master) Todo: Shopping list updates
+>> git log --graph --all --decorate --oneline -6
+* 3730b34 (HEAD -> master) Rebasing example
+* 0c10d62 Todo: Shopping list updates
 | * e493cb0 (camping) Todo: Add activities
 | * 0abeeb7 Todo List for weekend Camping
 |/
 * 4123594 Git Rebasing
 * 6523b77 (tag: C_17, origin/master) interactive staging
-* dec6aeb Checkout tags
-* 6c77d46 Deleting tags locally and in remote
-* 7e4d820 tagging commits
-* 9005075 (tag: C_15) git remote prune
-* 9d3b922 git remote prune
 ```
 
-in the log we can see from the commit where we branched, there are 2 commits in the camping branch and a commit in the master branch. 
+in the log we can see from the commit where we branched, there are 2 commits in the camping branch and 2 commits in the master branch. 
 
-Now we can rebase: If we are on the camping branch, we can use `git rebase master`. If we are on master branch we can use `git rebase master camping`
+3. Now we can rebase: If we are on the camping branch, we can use `git rebase master`. If we are on master branch we can use `git rebase master camping`
+
+```
+>> git merge-base master camping
+41235945116f7de6e61d4943356ba8c0c8ff8e2e
+
+>> git rebase master camping
+First, rewinding head to replay your work on top of it...
+Applying: Todo List for weekend Camping
+Applying: Todo: Add activities
+
+>> git log --graph --all --decorate --oneline -6
+* 2983a27 (HEAD -> camping) Todo: Add activities
+* 86cb91e Todo List for weekend Camping
+* 3730b34 (master) Rebasing example
+* 0c10d62 Todo: Shopping list updates
+* 4123594 Git Rebasing
+* 6523b77 (tag: C_17, origin/master) interactive staging
+```
+
+After rebasing we can see that the commits from the master branch as it is, but the commits from the camping branch are moving to the tip of the master and the SHA changed.
+
+## Merging vs Rebasing
+
+Merging and rebasing are two ways of incorporating changes from one branch into another branch. Both gives us the same results, but the means are different.
+
+<img src="images/9.png" width=400 height=200>
+
+<img src="images/10.png" width=400 height=200>
+
+Merging: 
+- Adds a merge commit 
+- It is non-destructive all the SHAs are not changed.
+- Complete record of what happened and when it happened are avaialble
+- Easy to undo commits by using reset
+- Logs can become uncluttered and non-linear
+
+Rebasing:
+- No additional merge commits
+- Destructive : SHA changes, commits are rewritten
+- No longer complete record of what happened and when it happened are avaialble
+- Tricky to undo 
+- Logs are much cleaner and linear.
+
+The golden rule of rebasing: <br/> You should not rebase a public branch
+- Rebase abandons existing, shared commits and creates new, similar commits instead
+- Collaborators would see the project history vanish
+- Getting all collaborators back in sync can be a nightmare
+
+How to choose ? 
+
+- *Merge* when we want to allow commits to stand out or to be clearly grouped
+- *Merge* to bring large topic branches back into master
+- *Rebase* to add minor commits in master to a topic branch
+- *Rebase* to move commits from one branch to another
+- *Merge* anytime the topic branch is already public and bring used by others (The golden rule of rebasing)
 
