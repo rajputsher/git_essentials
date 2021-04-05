@@ -1,0 +1,5 @@
+pack food
+cards
+speakers
+blankets
+fuel car
