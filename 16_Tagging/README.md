@@ -83,3 +83,30 @@ To https://github.com/rajputsher/git_essentials.git
  - [deleted]         C_14
 ```
 
+## Cheking out tags
+
+- Tags are not branches 
+- Tags can be checked out, just like any commit.
+- `git checkout -b <new_branch_name> <tag_name>`: Will create a branch from the tagged commit.
+- `git checkout <tag_name>`. ex: `git checkout v1.1` will not create a new branch instead will move the head to that commit. This is lead to a Detached HEAD state. 
+<img src="images/1.png" width=400 height=100>
+
+In Detached head state: 
+- It is like being on an unarmed branch
+- New commits will not belong to any branch 
+- Detached commits will be garbage collected (~2 Weeks)
+
+What happens when we make commits from this stage is that we create an unnamed branch as shown below: 
+
+<img src="images/2.png" width=400 height=100>
+
+When we move back to the master branch, there is no easy way to get back to the commit made on that unnamed branch. 
+
+<img src="images/3.png" width=400 height=100>
+
+
+There are a few ways to get back to such branches: 
+
+- Tag the commit on the unnamed branch. Ex: `git tag temp` 
+- Create a branch (HEAD detached). `git branch temp_branch`
+- Better way of doing it is to create a branch and reattach HEAD. `git checkout -b temp_branch`
