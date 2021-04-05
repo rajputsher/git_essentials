@@ -177,6 +177,129 @@ Example: `git rebase --onto master ecommerce new_feature`
 <img src="images/8.png" width=400 height=200>
 Take new_feature branch off of the ecommerce branch and put it to the tip of the master branch.
 
+Example: 
+```
+> git checkout -b expenses
+Switched to a new branch 'expenses'
 
+>> git status
+On branch expenses
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+
+        15_BranchManagement/Expenses.txt
+
+nothing added to commit but untracked files present (use "git add" to track)
+
+>> git add .
+
+>> git commit -m "Added Expenses"
+[expenses 9d16cab] Added Expenses
+ 1 file changed, 7 insertions(+)
+ create mode 100644 15_BranchManagement/Expenses.txt
+
+>> git log --graph --all --decorate --oneline -9
+* 9d16cab (HEAD -> expenses) Added Expenses
+* 9085b2e (camping) Git rebase --onto
+* 1a810c2 Update shopping list with orange
+* 7e10843 Resolving rebase conflicts
+* 3abbdac MergingVsRebasing
+* ff7e9d2 Todo: Add activities
+* 3cd03f8 Todo List for weekend Camping
+* af728d9 (master) Update shopping list with Apple
+* 3730b34 Rebasing example
+
+>> git rebase --onto master camping expenses
+First, rewinding head to replay your work on top of it...
+Applying: Added Expenses
+
+>> git log --graph --all --decorate --oneline -9
+* 959e1fd (HEAD -> expenses) Added Expenses
+| * 9085b2e (camping) Git rebase --onto
+| * 1a810c2 Update shopping list with orange
+| * 7e10843 Resolving rebase conflicts
+| * 3abbdac MergingVsRebasing
+| * ff7e9d2 Todo: Add activities
+| * 3cd03f8 Todo List for weekend Camping
+|/
+* af728d9 (master) Update shopping list with Apple
+* 3730b34 Rebasing example
+
+>> git rebase --onto camping master expenses
+First, rewinding head to replay your work on top of it...
+Applying: Added Expenses
+
+>> git log --graph --all --decorate --oneline -9
+* f4340a1 (HEAD -> expenses) Added Expenses
+* 9085b2e (camping) Git rebase --onto
+* 1a810c2 Update shopping list with orange
+* 7e10843 Resolving rebase conflicts
+* 3abbdac MergingVsRebasing
+* ff7e9d2 Todo: Add activities
+* 3cd03f8 Todo List for weekend Camping
+* af728d9 (master) Update shopping list with Apple
+* 3730b34 Rebasing example
+```
+
+Here we can see how we rebased the expenses branch onto master and then on to camping. This can be seen in the log.
+
+## Undo a rebase
+
+- Can undo simple rebases 
+- Data is lost: SHAs, commit messages etc.
+
+If it is a simple rebase , i.e ORIG_HEAD has not changed again, we can use `git reset --hard ORIG_HEAD`
+
+If we want to undo by rebasing to former merge-base SHAs: <br/>
+`git rebase 834fde234 master new_feature`
+
+Example of undo rebase: 
+```
+>> git log --graph --all --decorate --oneline -9
+* f4340a1 (HEAD -> expenses) Added Expenses
+* 9085b2e (camping) Git rebase --onto
+* 1a810c2 Update shopping list with orange
+* 7e10843 Resolving rebase conflicts
+* 3abbdac MergingVsRebasing
+* ff7e9d2 Todo: Add activities
+* 3cd03f8 Todo List for weekend Camping
+* af728d9 (master) Update shopping list with Apple
+* 3730b34 Rebasing example
+
+>> git rebase --onto master camping expenses
+First, rewinding head to replay your work on top of it...
+Applying: Added Expenses
+
+>> git log --graph --all --decorate --oneline -9
+* 3d38577 (HEAD -> expenses) Added Expenses
+| * 9085b2e (camping) Git rebase --onto
+| * 1a810c2 Update shopping list with orange
+| * 7e10843 Resolving rebase conflicts
+| * 3abbdac MergingVsRebasing
+| * ff7e9d2 Todo: Add activities
+| * 3cd03f8 Todo List for weekend Camping
+|/
+* af728d9 (master) Update shopping list with Apple
+* 3730b34 Rebasing example
+
+>> git reset --hard ORIG_HEAD
+HEAD is now at f4340a1 Added Expenses
+
+>> git log --graph --all --decorate --oneline -9
+* f4340a1 (HEAD -> expenses) Added Expenses
+* 9085b2e (camping) Git rebase --onto
+* 1a810c2 Update shopping list with orange
+* 7e10843 Resolving rebase conflicts
+* 3abbdac MergingVsRebasing
+* ff7e9d2 Todo: Add activities
+* 3cd03f8 Todo List for weekend Camping
+* af728d9 (master) Update shopping list with Apple
+* 3730b34 Rebasing example
+```
+Here we can see in the log that the SHA before the rebase and current HEAD are the same.
+
+## Interactive rebasing
+
+`git rebase -i master new_feature`
 
 
