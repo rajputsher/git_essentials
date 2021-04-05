@@ -77,5 +77,9 @@ Writing objects: 100% (1/1), 161 bytes | 80.00 KiB/s, done.
 Total 1 (delta 0), reused 0 (delta 0)
 To https://github.com/rajputsher/git_essentials.git
  * [new tag]         C_15 -> C_15
+
+>> git push origin :C_14
+To https://github.com/rajputsher/git_essentials.git
+ - [deleted]         C_14
 ```
 
