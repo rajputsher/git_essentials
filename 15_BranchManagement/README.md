@@ -292,7 +292,7 @@ URL: https://github.com/rajputsher/git_essentials.git
 If you want to get the pruned branches when you fetch. <br/> Use: 1. `git fetch --prune` or `git fetch -p`
 2. Or change the global config to do so: `git config --global fetch.prune true`
 
-Following are not same as `git remote prune `: <br/>
+Following are not same as `git remote prune` they are completely different: <br/>
 `git prune`#Prune all the unreachable objects <br/>
 `git gc` #Part of garbage collection
 
