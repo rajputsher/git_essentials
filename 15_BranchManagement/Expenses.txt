@@ -1,0 +1,7 @@
+Expenses
+
+Fuel        50 Eur
+Groceries   34 Eur
+Shoes       50 Eur
+Tent        75 Eur
+Sunsreen    5 Eur
