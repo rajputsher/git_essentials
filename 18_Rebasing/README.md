@@ -162,3 +162,10 @@ How to choose ?
 - *Rebase* to move commits from one branch to another
 - *Merge* anytime the topic branch is already public and bring used by others (The golden rule of rebasing)
 
+## Resolve rebase conflicts
+
+- Rebasing creates new commits on existing code
+- May conflict with existing code
+- When there is a conflict git pauses rebase before each conflicting commit.Similar to resolving merge conflicts.
+- After resolving the commits , we need to use `git rebase --continue` to continue with the next conflict or `git rebase --skip` when you want to skip the conflict or `git rebase --abort` to stop rebasing.
+
