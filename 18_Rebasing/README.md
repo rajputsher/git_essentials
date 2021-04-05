@@ -302,4 +302,10 @@ Here we can see in the log that the SHA before the rebase and current HEAD are t
 
 `git rebase -i master new_feature`
 
+## Pull rebase
 
+- Fetch from remote, then rebase instead of merging
+- Keeps history cleaner by reducing merge commits 
+- only use on local commits not shared to a remote 
+
+`git pull --rebase` or `git pull -r` or `git pull --rebase=preserve`
