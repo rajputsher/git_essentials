@@ -173,8 +173,8 @@ How to choose ?
 
 `git rebase --onto newbase upstream branch`<br/>
 `git rebase --onto <new_base> <Old_branch it branched out of> <branch_to_rebase>`
-Example: `git rebase --onto master ecommerce new_feature` 
-<img src="images/8.png" width=400 height=200>
+Example: `git rebase --onto master ecommerce new_feature` <br/>
+<img src="images/8.png" width=400 height=200><br/>
 Take new_feature branch off of the ecommerce branch and put it to the tip of the master branch.
 
 Example: 
