@@ -169,3 +169,14 @@ How to choose ?
 - When there is a conflict git pauses rebase before each conflicting commit.Similar to resolving merge conflicts.
 - After resolving the commits , we need to use `git rebase --continue` to continue with the next conflict or `git rebase --skip` when you want to skip the conflict or `git rebase --abort` to stop rebasing.
 
+## Rebase onto other branches
+
+`git rebase --onto newbase upstream branch`<br/>
+`git rebase --onto <new_base> <Old_branch it branched out of> <branch_to_rebase>`
+Example: `git rebase --onto master ecommerce new_feature` 
+<img src="images/8.png" width=400 height=200>
+Take new_feature branch off of the ecommerce branch and put it to the tip of the master branch.
+
+
+
+
