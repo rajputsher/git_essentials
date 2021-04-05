@@ -3,3 +3,7 @@ cards
 speakers
 blankets
 fuel car
+
+Activities:
+hike
+canoe
