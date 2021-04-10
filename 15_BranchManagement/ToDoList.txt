@@ -1,6 +1,6 @@
 Morning
 ==========
-Develop feature Alien
+Develop feature Alone
 Call the housing company
 Send the email to landlord
 
