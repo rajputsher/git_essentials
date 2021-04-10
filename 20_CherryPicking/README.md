@@ -149,4 +149,18 @@ Example :
 ```
 
 
+## Apply Formatted Patches 
+
+- When we apply formatted patches , it extracts author, commit message, and changes from a mailbox message and apply them to the current branch. 
+
+- It is similar to cherry-picking i.e gets same changes but different SHAs
+
+- The main different between normal-patch and the formatted-patch is the commit histories are contained in the formatted patch . 
+
+Usage : 
+- Apply single patch : `git am <locationOfPatchFile>`
+- Apply all patches in a directory: `git am <folderName/*.patch>`
+
+
+
 
