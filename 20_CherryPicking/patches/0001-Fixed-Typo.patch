@@ -1,0 +1,24 @@
+From 4ea4118a083e24d7e5b98ef83cd437ad12ec4b3d Mon Sep 17 00:00:00 2001
+From: rajputsher <shersingh72@gmail.com>
+Date: Sat, 10 Apr 2021 17:17:44 +0200
+Subject: [PATCH 1/2] Fixed Typo
+
+---
+ 15_BranchManagement/ToDoList.txt | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/15_BranchManagement/ToDoList.txt b/15_BranchManagement/ToDoList.txt
+index aeb4e19..7affa43 100644
+--- a/15_BranchManagement/ToDoList.txt
++++ b/15_BranchManagement/ToDoList.txt
+@@ -1,6 +1,6 @@
+ Morning
+ ==========
+-Develop feature Alien
++Develop feature Alone
+ Call the housing company
+ Send the email to landlord
+ 
+-- 
+2.18.0.windows.1
+
